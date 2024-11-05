@@ -1,7 +1,7 @@
+from typing import Optional
+
 import click
 from pypdf import PdfReader
-from typing import Optional
-import os
 
 
 @click.command()
@@ -32,5 +32,5 @@ def main(input_pdf: str, output_txt: Optional[str]) -> None:
 
 
 if __name__ == "__main__":
-    print("current working directory:", os.getcwd())
+    # print("current working directory:", os.getcwd())
     main()

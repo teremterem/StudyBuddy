@@ -1,5 +1,6 @@
 # anthropic
 # click
+html2text  # TODO Oleksandr: this one is GPL - try markdownify or Pandoc instead
 # miniagents
 openai
 # pdfminer
