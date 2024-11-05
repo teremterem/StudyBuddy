@@ -20,12 +20,20 @@ exceptiongroup==1.2.2
     # via anyio
 h11==0.14.0
     # via httpcore
+h2==4.1.0
+    # via httpx
+hpack==4.0.0
+    # via h2
 html2text==2024.2.26
     # via -r requirements.in
 httpcore==1.0.6
     # via httpx
 httpx==0.27.2
-    # via openai
+    # via
+    #   -r requirements.in
+    #   openai
+hyperframe==6.0.1
+    # via h2
 idna==3.10
     # via
     #   anyio
