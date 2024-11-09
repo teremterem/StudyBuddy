@@ -16,7 +16,7 @@ def main(input_pdf: str, output_txt: Optional[str]) -> None:
 
         pdf_to_text(input_pdf, output_txt)
         click.echo(f"Successfully converted {input_pdf} to {output_txt}")
-    except:
+    except Exception:
         traceback.print_exc()
         raise click.Abort()
 

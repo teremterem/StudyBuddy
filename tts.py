@@ -2,12 +2,8 @@ import traceback
 from typing import Optional
 
 import click
-from dotenv import load_dotenv
 
 from study_buddy import text_to_mp3
-
-
-load_dotenv()
 
 
 @click.command()
@@ -20,7 +16,7 @@ def main(input_text: str, output_mp3: Optional[str]) -> None:
 
         text_to_mp3(input_text, output_mp3)
         click.echo(f"Successfully converted {input_text} to {output_mp3}")
-    except:
+    except Exception:
         traceback.print_exc()
         raise click.Abort()
 
