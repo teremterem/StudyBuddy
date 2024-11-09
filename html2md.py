@@ -11,6 +11,9 @@ from study_buddy import html_to_md
 @click.option("--output", "-o", "output_md", type=click.Path(dir_okay=False), default=None)
 def main(input_html: str, output_md: Optional[str]) -> None:
     try:
+        if output_md is None:
+            output_md = input_html + ".md"
+
         html_to_md(input_html, output_md)
         click.echo(f"Successfully converted {input_html} to {output_md}")
     except Exception:

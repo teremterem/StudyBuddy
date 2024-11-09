@@ -11,6 +11,9 @@ from study_buddy import pdf_to_text
 @click.option("--output", "-o", "output_txt", type=click.Path(dir_okay=False), default=None)
 def main(input_pdf: str, output_txt: Optional[str]) -> None:
     try:
+        if output_txt is None:
+            output_txt = input_pdf + ".txt"
+
         pdf_to_text(input_pdf, output_txt)
         click.echo(f"Successfully converted {input_pdf} to {output_txt}")
     except:

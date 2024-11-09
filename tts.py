@@ -15,6 +15,9 @@ load_dotenv()
 @click.option("--output", "-o", "output_mp3", type=click.Path(dir_okay=False), default=None)
 def main(input_text: str, output_mp3: Optional[str]) -> None:
     try:
+        if output_mp3 is None:
+            output_mp3 = input_text + ".mp3"
+
         text_to_mp3(input_text, output_mp3)
         click.echo(f"Successfully converted {input_text} to {output_mp3}")
     except:
