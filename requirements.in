@@ -5,6 +5,7 @@ httpx[http2]
 # miniagents
 openai
 # pdfminer
+prompt-toolkit
 pypdf
 python-dotenv
 # unstructured
