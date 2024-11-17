@@ -6,7 +6,9 @@ httpx[http2]
 openai
 # pdfminer
 prompt-toolkit
+pyinstaller
 pypdf
 python-dotenv
+pywebview
 streamlit
 # unstructured

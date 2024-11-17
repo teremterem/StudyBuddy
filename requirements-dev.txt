@@ -107,6 +107,7 @@ idna==3.10
     #   requests
 importlib-metadata==8.5.0
     # via
+    #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
     #   build
     #   jupyter-client
     #   jupyter-lsp
@@ -410,7 +411,9 @@ wheel==0.45.0
 xonsh==0.18.4
     # via -r requirements-dev.in
 zipp==3.21.0
-    # via importlib-metadata
+    # via
+    #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
+    #   importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
