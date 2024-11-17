@@ -8,4 +8,5 @@ openai
 prompt-toolkit
 pypdf
 python-dotenv
+streamlit
 # unstructured
