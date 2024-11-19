@@ -31,6 +31,7 @@ def text_to_mp3(input_txt: str, output_mp3_file: str, openai_client: Optional["O
         input=input_txt,
     )
 
+    print(Path(output_mp3_file).resolve())  # TODO either remove this print or make it a logger
     response.write_to_file(output_mp3_file)
 
 

@@ -14,7 +14,7 @@ def main(txt_file: Optional[str], output_mp3: Optional[str]) -> None:
     try:
         if txt_file is None:
             if output_mp3 is None:
-                output_mp3 = "temp.mp3"  # TODO: timestamp and hash
+                output_mp3 = "temp.mp3"  # TODO timestamp and hash
             input_txt = prompt_text(" for TTS")
 
         else:
