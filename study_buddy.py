@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Optional, TYPE_CHECKING
+from typing import Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from openai import OpenAI
@@ -19,7 +19,7 @@ from pypdf import PdfReader
 load_dotenv()
 
 
-def text_to_mp3(input_txt: str, output_mp3_file: str, openai_client: Optional["OpenAI"] = None) -> None:
+def text_to_mp3(input_txt: str, output_mp3_file: Union[str, Path], openai_client: Optional["OpenAI"] = None) -> None:
     if openai_client is None:
         from openai import OpenAI
 
@@ -35,7 +35,7 @@ def text_to_mp3(input_txt: str, output_mp3_file: str, openai_client: Optional["O
     response.write_to_file(output_mp3_file)
 
 
-def pdf_to_text(input_pdf_file: str, output_txt_file: str) -> None:
+def pdf_to_text(input_pdf_file: Union[str, Path], output_txt_file: Union[str, Path]) -> None:
     reader = PdfReader(input_pdf_file)
 
     text = ""
@@ -46,7 +46,7 @@ def pdf_to_text(input_pdf_file: str, output_txt_file: str) -> None:
         f.write(text)
 
 
-def html_to_md(input_html_file: str, output_md_file: str) -> None:
+def html_to_md(input_html_file: Union[str, Path], output_md_file: Union[str, Path]) -> None:
     h = html2text.HTML2Text(bodywidth=0)
 
     html_content = Path(input_html_file).read_text(encoding="utf-8")
