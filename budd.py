@@ -9,8 +9,8 @@ st.set_page_config(layout="wide")
 (col1,) = st.columns(1)
 
 with col1:
-    st.header("OpenAI TTS")
-    text_input = st.text_area("Enter your text here:")
+    st.header("OpenAI Text-to-Speech")
+    text_input = st.text_area("Enter text here:")
 
 if st.button("Read aloud") and text_input:
     st.markdown(text_input)
