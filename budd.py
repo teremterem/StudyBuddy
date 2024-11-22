@@ -13,7 +13,8 @@ with col1:
     text_input = st.text_area("Enter text here:")
 
 if st.button("Read aloud") and text_input:
-    st.markdown(text_input)
+    # TODO what about html injections ?
+    st.html(f"<pre style='white-space: pre-wrap;'>{text_input}</pre>")
 
     mp3_file = Path("temp.mp3")
     text_to_mp3(text_input, mp3_file)
