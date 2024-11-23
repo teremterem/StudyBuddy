@@ -59,7 +59,7 @@ click==8.1.7
     #   pip-tools
 comm==0.2.2
     # via ipykernel
-debugpy==1.8.8
+debugpy==1.8.9
     # via ipykernel
 decorator==5.1.1
     # via ipython
@@ -107,7 +107,6 @@ idna==3.10
     #   requests
 importlib-metadata==8.5.0
     # via
-    #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
     #   build
     #   jupyter-client
     #   jupyter-lsp
@@ -252,7 +251,6 @@ prometheus-client==0.21.0
     # via jupyter-server
 prompt-toolkit==3.0.48
     # via
-    #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
     #   ipython
     #   xonsh
 psutil==6.1.0
@@ -350,7 +348,7 @@ tomli==2.1.0
     #   pylint
 tomlkit==0.13.2
     # via pylint
-tornado==6.4.1
+tornado==6.4.2
     # via
     #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
     #   ipykernel
@@ -395,9 +393,7 @@ urllib3==2.2.3
 virtualenv==20.27.1
     # via pre-commit
 wcwidth==0.2.13
-    # via
-    #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
-    #   prompt-toolkit
+    # via prompt-toolkit
 webcolors==24.11.1
     # via jsonschema
 webencodings==0.5.1
@@ -406,14 +402,12 @@ webencodings==0.5.1
     #   tinycss2
 websocket-client==1.8.0
     # via jupyter-server
-wheel==0.45.0
+wheel==0.45.1
     # via pip-tools
 xonsh==0.18.4
     # via -r requirements-dev.in
 zipp==3.21.0
-    # via
-    #   -c /Users/terem/Desktop/hobby/StudyBuddy/requirements.txt
-    #   importlib-metadata
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
