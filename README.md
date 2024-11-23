@@ -21,5 +21,5 @@ python -m pip install -r requirements.txt
 ## Run
 
 ```sh
-python -m streamlit run budd.py
+python -m streamlit run tts.py
 ```

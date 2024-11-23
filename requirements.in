@@ -2,5 +2,6 @@ html2text  # ATTENTION! licensed under GPL; more permissive alternatives: markdo
 openai
 pypdf
 python-dotenv
+st-btn-group
 streamlit
-# unstructured  # TODO what's this for ?
+# unstructured  # TODO what is it for ?
