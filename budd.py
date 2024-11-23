@@ -4,12 +4,16 @@ import streamlit as st
 
 from study_buddy import text_to_mp3
 
-st.set_page_config(layout="wide")
+
+PAGE_TITLE = "Text-to-Speech"
+
+
+st.set_page_config(page_title=PAGE_TITLE, layout="wide")
 
 (col1,) = st.columns(1)
 
 with col1:
-    st.header("OpenAI Text-to-Speech")
+    st.header(PAGE_TITLE)
     text_input = st.text_area("Enter text here:")
 
 if st.button("Read aloud") and text_input:
