@@ -16,7 +16,7 @@ with col1:
     st.header(PAGE_TITLE)
     text_input = st.text_area("Enter text here:")
 
-if st.button("Read aloud") and text_input:
+if st.button("Read Aloud") and text_input:
     # TODO what about html injections ?
     st.html(f"<pre style='white-space: pre-wrap;'>{text_input}</pre>")
 
