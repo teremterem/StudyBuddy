@@ -14,7 +14,9 @@ st.set_page_config(page_title=PAGE_TITLE, layout="wide")
 
 with col1:
     st.header(PAGE_TITLE)
-    text_input = st.text_area("Enter text here:", height=200, placeholder="Enter text here", label_visibility="collapsed")
+    text_input = st.text_area(
+        "Enter text here:", placeholder="Enter text here", label_visibility="collapsed", height=300
+    )
 
 if st.button("Read Aloud") and text_input:
     # TODO what about html injections ?
