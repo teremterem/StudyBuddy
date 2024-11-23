@@ -1,3 +1,6 @@
+state/
+
+.DS_Store
 .vscode/
 
 # Byte-compiled / optimized / DLL files

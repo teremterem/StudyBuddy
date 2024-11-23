@@ -1,11 +1,6 @@
-# anthropic
-# click
-html2text  # TODO Oleksandr: this one is GPL - try markdownify or Pandoc instead
-httpx[http2]
-# miniagents
+html2text  # ATTENTION! licensed under GPL; more permissive alternatives: markdownify, Pandoc
 openai
-# pdfminer
-prompt-toolkit
 pypdf
 python-dotenv
-# unstructured
+streamlit
+# unstructured  # TODO what is it for ?

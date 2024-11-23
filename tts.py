@@ -1,33 +1,73 @@
-import traceback
 from pathlib import Path
-from typing import Optional
 
-import click
+import streamlit as st
 
-from study_buddy import text_to_mp3, prompt_text
-
-
-@click.command()
-@click.argument("txt_file", type=click.Path(exists=True, dir_okay=False), required=False)
-@click.option("--output", "-o", "output_mp3", type=click.Path(dir_okay=False), default=None)
-def main(txt_file: Optional[str], output_mp3: Optional[str]) -> None:
-    try:
-        if txt_file is None:
-            if output_mp3 is None:
-                output_mp3 = "temp.mp3"  # TODO: timestamp and hash
-            input_txt = prompt_text(" for TTS")
-
-        else:
-            if output_mp3 is None:
-                output_mp3 = txt_file + ".mp3"
-            input_txt = Path(txt_file).read_text(encoding="utf-8")
-
-        text_to_mp3(input_txt, output_mp3)
-        click.echo(f"Audio saved to {output_mp3}")
-    except Exception:
-        traceback.print_exc()
-        raise click.Abort()
+from study_buddy import text_to_mp3
 
 
-if __name__ == "__main__":
-    main()
+STATE_DIR = Path("state")
+STATE_DIR.mkdir(exist_ok=True)
+
+INPUT_TXT_FILE = STATE_DIR / "tts_input.txt"
+if not INPUT_TXT_FILE.exists():
+    INPUT_TXT_FILE.touch()  # in case the user wants to use a different editor to enter text
+
+OUTPUT_TXT_FILE = STATE_DIR / "tts_output.txt"
+OUTPUT_MP3_FILE = STATE_DIR / "tts_output.mp3"
+
+PAGE_TITLE = "Text-to-Speech"
+st.set_page_config(page_title=PAGE_TITLE, layout="wide")
+st.header(PAGE_TITLE)
+
+if INPUT_TXT_FILE.exists():
+    input_text = INPUT_TXT_FILE.read_text(encoding="utf-8")
+else:
+    input_text = ""
+
+if OUTPUT_TXT_FILE.exists():
+    output_text = OUTPUT_TXT_FILE.read_text(encoding="utf-8")
+else:
+    output_text = ""
+
+first_run = st.session_state.get("first_run", True)
+if first_run:
+    st.session_state["first_run"] = False
+
+blank_input = not input_text.strip()
+updated_input = not blank_input and input_text != output_text
+edit_mode = st.session_state.get("edit_mode", False)
+update_audio = updated_input or not OUTPUT_MP3_FILE.exists()
+
+if updated_input:
+    OUTPUT_TXT_FILE.write_text(input_text, encoding="utf-8")
+
+if update_audio:
+    text_to_mp3(input_text, OUTPUT_MP3_FILE)
+
+
+if blank_input or edit_mode:
+    new_input_text = st.text_area(
+        "Enter text here:",
+        value=input_text,
+        placeholder="Enter text here",
+        label_visibility="collapsed",
+        height=300,
+    )
+    if new_input_text != input_text or st.button("Read Aloud"):
+        st.session_state["edit_mode"] = False
+        INPUT_TXT_FILE.write_text(new_input_text, encoding="utf-8")
+        st.rerun()
+
+else:
+    with st.sidebar:
+        if st.button("New"):
+            INPUT_TXT_FILE.write_text("", encoding="utf-8")
+            st.rerun()
+        if st.button("Edit"):
+            st.session_state["edit_mode"] = True
+            st.rerun()
+
+    st.audio(OUTPUT_MP3_FILE.read_bytes(), format="audio/mp3", autoplay=not first_run)
+
+    # TODO how to escape html in input_text so it is safe ?
+    st.html(f'<pre style="white-space: pre-wrap;">{input_text}</pre>')
