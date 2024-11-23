@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import streamlit as st
-from st_btn_group import st_btn_group
 
 from study_buddy import text_to_mp3
 
@@ -30,16 +29,14 @@ if OUTPUT_TXT_FILE.exists():
 else:
     output_text = ""
 
+first_run = st.session_state.get("first_run", True)
+if first_run:
+    st.session_state["first_run"] = False
+
 blank_input = not input_text.strip()
 updated_input = not blank_input and input_text != output_text
 edit_mode = st.session_state.get("edit_mode", False)
 update_audio = updated_input or not OUTPUT_MP3_FILE.exists()
-
-print()
-print(f"blank_input: {blank_input}")
-print(f"updated_input: {updated_input}")
-print(f"edit_mode: {edit_mode}")
-print(f"update_audio: {update_audio}")
 
 if updated_input:
     OUTPUT_TXT_FILE.write_text(input_text, encoding="utf-8")
@@ -49,33 +46,28 @@ if update_audio:
 
 
 if blank_input or edit_mode:
-    with st.form("text_to_speech_form", border=False):
-        input_text = st.text_area(
-            "Enter text here:",
-            value=input_text,
-            placeholder="Enter text here",
-            label_visibility="collapsed",
-            height=300,
-        )
-        if st.form_submit_button("Read Aloud"):
-            if input_text.strip():
-                INPUT_TXT_FILE.write_text(input_text, encoding="utf-8")
-                st.session_state["edit_mode"] = False
-                st.rerun()
+    new_input_text = st.text_area(
+        "Enter text here:",
+        value=input_text,
+        placeholder="Enter text here",
+        label_visibility="collapsed",
+        height=300,
+    )
+    if new_input_text != input_text or st.button("Read Aloud"):
+        st.session_state["edit_mode"] = False
+        INPUT_TXT_FILE.write_text(new_input_text, encoding="utf-8")
+        st.rerun()
 
 else:
-    new_or_edit_clicked = st_btn_group(
-        buttons=[{"label": "New", "value": "New"}, {"label": "Edit", "value": "Edit"}]
-    )
-    if new_or_edit_clicked == "New":
-        INPUT_TXT_FILE.write_text("", encoding="utf-8")
-        st.rerun()
-    elif new_or_edit_clicked == "Edit":
-        st.session_state["edit_mode"] = True
-        st.rerun()
+    with st.sidebar:
+        if st.button("New"):
+            INPUT_TXT_FILE.write_text("", encoding="utf-8")
+            st.rerun()
+        if st.button("Edit"):
+            st.session_state["edit_mode"] = True
+            st.rerun()
 
-    st.audio(OUTPUT_MP3_FILE.read_bytes(), format="audio/mp3", autoplay=update_audio)
-
+    st.audio(OUTPUT_MP3_FILE.read_bytes(), format="audio/mp3", autoplay=not first_run)
 
     # TODO how to escape html in input_text so it is safe ?
     st.html(f'<pre style="white-space: pre-wrap;">{input_text}</pre>')
