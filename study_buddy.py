@@ -19,6 +19,14 @@ from pypdf import PdfReader
 load_dotenv()
 
 
+STATE_DIR = Path(__file__).parent / "state"
+STATE_DIR.mkdir(exist_ok=True)
+
+INPUT_TXT_FILE = STATE_DIR / "tts_input.txt"
+OUTPUT_TXT_FILE = STATE_DIR / "tts_output.txt"
+OUTPUT_MP3_FILE = STATE_DIR / "tts_output.mp3"
+
+
 def text_to_mp3(input_txt: str, output_mp3_file: Union[str, Path], openai_client: Optional["OpenAI"] = None) -> None:
     if openai_client is None:
         from openai import OpenAI

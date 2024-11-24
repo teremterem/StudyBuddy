@@ -1,19 +1,10 @@
-from pathlib import Path
-
 import streamlit as st
 
-from study_buddy import text_to_mp3
+from study_buddy import text_to_mp3, INPUT_TXT_FILE, OUTPUT_TXT_FILE, OUTPUT_MP3_FILE
 
 
-STATE_DIR = Path("state")
-STATE_DIR.mkdir(exist_ok=True)
-
-INPUT_TXT_FILE = STATE_DIR / "tts_input.txt"
 if not INPUT_TXT_FILE.exists():
     INPUT_TXT_FILE.touch()  # in case the user wants to use a different editor to enter text
-
-OUTPUT_TXT_FILE = STATE_DIR / "tts_output.txt"
-OUTPUT_MP3_FILE = STATE_DIR / "tts_output.mp3"
 
 PAGE_TITLE = "Text-to-Speech"
 st.set_page_config(page_title=PAGE_TITLE, layout="wide")

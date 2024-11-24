@@ -3,7 +3,7 @@ from typing import Optional
 
 import click
 
-from study_buddy import html_to_md
+from study_buddy import html_to_md, INPUT_TXT_FILE
 
 
 @click.command()
@@ -12,7 +12,7 @@ from study_buddy import html_to_md
 def main(input_html: str, output_md: Optional[str]) -> None:
     try:
         if output_md is None:
-            output_md = input_html + ".md"
+            output_md = INPUT_TXT_FILE
 
         html_to_md(input_html, output_md)
         click.echo(f"Successfully converted {input_html} to {output_md}")

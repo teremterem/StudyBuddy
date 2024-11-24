@@ -3,7 +3,7 @@ from typing import Optional
 
 import click
 
-from study_buddy import pdf_to_text
+from study_buddy import pdf_to_text, INPUT_TXT_FILE
 
 
 @click.command()
@@ -12,7 +12,7 @@ from study_buddy import pdf_to_text
 def main(input_pdf: str, output_txt: Optional[str]) -> None:
     try:
         if output_txt is None:
-            output_txt = input_pdf + ".txt"
+            output_txt = INPUT_TXT_FILE
 
         pdf_to_text(input_pdf, output_txt)
         click.echo(f"Successfully converted {input_pdf} to {output_txt}")
