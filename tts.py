@@ -36,7 +36,7 @@ if first_run:
 blank_input = not input_text.strip()
 updated_input = not blank_input and input_text != output_text
 edit_mode = st.session_state.get("edit_mode", False)
-update_audio = updated_input or not OUTPUT_MP3_FILE.exists()
+update_audio = updated_input or (not OUTPUT_MP3_FILE.exists() and not blank_input)
 
 if updated_input:
     OUTPUT_TXT_FILE.write_text(input_text, encoding="utf-8")
