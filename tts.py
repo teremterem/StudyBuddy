@@ -34,7 +34,7 @@ if regenerate_audio:
             OUTPUT_TXT_FILE.write_text(input_text, encoding="utf-8")
     except Exception as e:
         traceback.print_exc()  # TODO replace with logger
-        error_generating_audio = f"Error generating audio: {e}"
+        error_generating_audio = f"ERROR GENERATING AUDIO: {e}"
 
 autoplay_audio = st.session_state.get("autoplay_audio")
 if not autoplay_audio:
