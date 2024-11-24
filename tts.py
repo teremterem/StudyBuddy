@@ -58,7 +58,7 @@ else:
             st.session_state["edit_mode"] = True
             st.rerun()
 
-    st.audio(OUTPUT_MP3_FILE.read_bytes(), format="audio/mp3", autoplay=not first_run)
+    st.audio(OUTPUT_MP3_FILE.read_bytes(), format="audio/mp3", autoplay=update_audio or not first_run)
 
     # TODO how to escape html in input_text so it is safe ?
     st.html(f'<pre style="white-space: pre-wrap;">{input_text}</pre>')
