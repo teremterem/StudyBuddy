@@ -1,3 +1,4 @@
+import json
 import traceback
 
 import streamlit as st
@@ -34,7 +35,32 @@ if regenerate_audio:
             OUTPUT_TXT_FILE.write_text(input_text, encoding="utf-8")
     except Exception as e:
         traceback.print_exc()  # TODO replace with logger
-        error_generating_audio = f"ERROR GENERATING AUDIO: {e}"
+
+        try:
+            # let's assume it's an openai error, and that it is a json inside a json
+            a = e.response.json()
+            b = a["error"]
+            c = b["message"]
+            print()
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+            print(c)
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+            print()
+            error_nested_json = json.loads(c)
+            for individual_error in error_nested_json:
+                # remove the input field from the error message so it is more compact
+                individual_error.pop("input", None)
+            error_message = "\n" + json.dumps(error_nested_json, indent=4)
+        except Exception:
+            traceback.print_exc()  # TODO replace with logger
+            # something went wrong => let's fallback to a more generic error message
+            error_message = None
+
+        if not error_message:
+            # a more generic error message
+            error_message = str(e)
+
+        error_generating_audio = f"ERROR GENERATING AUDIO: {error_message}"
 
 autoplay_audio = st.session_state.get("autoplay_audio")
 if not autoplay_audio:
