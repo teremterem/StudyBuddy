@@ -2,6 +2,10 @@
 
 ## Setup
 
+First, copy `.env.template` to `.env` and provide missing values for variables.
+
+Then:
+
 ### Unix-like
 
 ```sh
